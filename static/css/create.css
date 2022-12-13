@@ -1,0 +1,34 @@
+.create-post-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 9;
+    background: rgba(41, 41, 41, 0.645);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.645);
+    backdrop-filter: blur(3.0px);
+    -webkit-backdrop-filter: blur(3.0 px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    background: #FFFFFF;
+    border: none;
+    font-size: 20px;
+    color: #262626;
+    cursor: pointer;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.hidden {
+    display:none;
+    pointer-events: none;
+    z-index: -1;
+}

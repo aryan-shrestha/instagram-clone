@@ -1,0 +1,383 @@
+.left-part {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 82px;
+}
+
+.right-part {
+    width: 19%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 84px;
+    left: 61%;
+}
+
+.story-container {
+    display: flex;
+    justify-content: flex-start;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    height: 120px;
+    align-items: center;
+    width: 100%;
+    overflow-x: scroll;
+}
+
+.story-container::-webkit-scrollbar {
+    display: none;
+}
+
+.story-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3px;
+    width: 80px;
+    max-width: 80px;
+}
+
+.story-card:first-child {
+    margin-left: 10px;
+}
+
+.post-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    background: #fff;
+    padding: 16px 0;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.post-card {
+    width: 100%;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+.post-img-block {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow-x: scroll;
+    display: flex;
+}
+
+.post-img-block img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.post-img-block::-webkit-scrollbar {
+    display: none;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+    height: 60px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+}
+
+.user-info .profile-pic {
+    margin-right: 10px;
+    width: 42px;
+    height: 42px;
+}
+
+.user-info .username {
+    font-weight: 600;
+    color: #000;
+    font-size: 14px;
+    max-width: fit-content;
+}
+
+.post-details {
+    padding: 20px;
+    gap: 10px;
+    padding-bottom: 0;
+}
+
+.post-reactions {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-top: -20px;
+    height: 50px;
+
+}
+
+.post-reactions .rec-icon {
+    height: 25px;
+    margin-right: 10px;
+}
+
+.sve-post-ic {
+    margin-left: auto;
+}
+
+.likes-div {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.likes-div img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #dbdbdb;
+    margin-right: 5px;
+}
+
+.likes-cnt span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.caption-div {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    color: hsl(0, 0%, 15%);
+}
+
+.caption-div span {
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.post-time {
+    margin-top: 10px;
+    font-size: 10px;
+    font-weight: 400;
+    color: hsl(0, 0%, 60%);
+    text-transform: uppercase;
+}
+
+.view-all-cmt {
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+.comment-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #efefef;
+    color: #8e8e8e;
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: 10px;
+    padding: 6px;
+    height: 50px;
+}
+
+.comment-div .rec-icon {
+    margin-right: 10px;
+}
+
+.comment-inp {
+    border: none;
+    width: 100%;
+}
+
+.action-btn,
+.comment-btn {
+    border: none;
+    color: #0095f6;
+    background: none;
+    cursor: pointer;
+}
+
+.comment-btn[disabled] {
+    opacity: .3;
+    pointer-events: none;
+}
+
+.login-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+}
+
+.logged-div,
+.s-userinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logged-div .profile-pic,
+.s-userinfo .profile-pic {
+    margin-right: 10px;
+}
+
+.name-div {
+    font-weight: 600;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    color: #262626;
+}
+
+.name-div .fullname {
+    color: #8e8e8e;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.suggestion-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.suggest-txt {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestion-txt {
+    color: #8e8e8e;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+.see-all-txt {
+    color: #262626;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.suggestions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.suggest-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px 0;
+}
+
+.s-userinfo .profile-pic {
+    width: 36px;
+    height: 36px;
+}
+
+.suggest-card .username {
+    text-align: start;
+    cursor: pointer;
+}
+
+.suggest-card .fullname {
+    font-size: 12px;
+}
+
+@media (max-width:1200px) {
+
+    .right-part {
+        left: 65%;
+        width: 26%;
+    }
+}
+
+@media (max-width:950px) {
+
+    .left-part {
+        width: 100%;
+    }
+
+    .right-part {
+        display: none;
+    }
+}
+
+@media (max-width:720px) {
+
+    .comment-div {
+        display: none;
+    }
+
+    .post-details {
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width:600px) {
+
+    .comment-div {
+        display: none;
+    }
+
+    .post-details {
+        padding: 10px;
+    }
+
+    .story-container {
+        border-radius: 0;
+        height: 90px;
+    }
+
+    .story-card:first-child {
+        margin-left: 0;
+    }
+
+    .left-part {
+        top: 50px;
+    }
+
+    .post-container {
+        margin-top: 0;
+        padding: 0;
+    }
+
+    .post-card {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    .rec-icon:last-child {
+        margin-right: 0;
+    }
+
+    .post-card:last-child {
+        margin-bottom: 50px;
+    }
+}

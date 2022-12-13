@@ -1,0 +1,294 @@
+{% extends 'main.html' %}
+{% load static %}
+{% load account_tags %}
+{% block content %}
+
+<style>
+    .hidden {
+        display: none;
+        z-index: -1;
+    }
+</style>
+
+<div class="page" style="margin-top: 80px;">
+    <!-- PROFILE -->
+    <div class="profile-wrap mb-2rem">
+        <div class="profile-avatar">
+            <div class="circ-story circ-gradient"></div>
+            <img src="{{user.profile_pic.url}}">
+        </div>
+
+        <div class="profile-info">
+            <div class="profile-title mb-1rem">
+                <h2>{{user.username}}</h2>
+                {% is_followed request.user 'is_followed' user.id as already_followed %}
+                {% if user == request.user %}
+                <a href="#" class="cta"
+                    style="text-decoration: none; cursor: pointer; background: none; color: #262626; border: #DBDBDB solid 1px; border-radius: 5px; font-weight: 500;">Edit
+                    profile</a>
+                {% elif not already_followed %}
+                <button class="cta" onclick="requestFollow('{{user.id}}')" id="follow-btn">Follow</button>
+                {% elif already_followed %}
+                <button class="cta" id="unfollow-btn" onclick="unFollow('{{user.id}}')">Unfollow</button>
+                {% endif %}
+            </div>
+            <!-- Profile Stats -->
+            <ul class="profile-numbers mb-1rem">
+                <li>
+                    <a href="#">
+                        <span class="profile-posts">{{posts.count}}</span>
+                        post{{posts.count|pluralize}}
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="profile-followers">{{user.get_total_followers}}</span>
+                        followers
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="profile-following">{{user.get_total_followings}}</span>
+                        following
+                    </a>
+                </li>
+            </ul>
+            <div class="profile-bio">
+                <h1 class="profile-name">{{user.name}}</h1>
+                <span class="profile-desc">
+                    <!-- user bio field is yet to be added on model -->
+                    <!-- {{user.bio}}  -->
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- STORIES -->
+    <div class="stories-wrap mb-2rem">
+        <ul class="stories inner-wrap">
+            <li class="story">
+                <div class="img-wrap">
+                    <div class="circ"></div>
+                    <img src="https://source.unsplash.com/1600x900/?summer">
+                </div>
+                <div class="story-title">
+                    Chillin
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- RESPONSIVE PROFILE NUMBERS -->
+    <ul class="profile-numbers responsive-profile">
+        <li>
+            <a href="#">
+                <span class="profile-posts">{{posts.count}}</span>
+                posts
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="profile-followers">{{user.get_total_followers}}</span>
+                followers
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span class="profile-following">10</span>
+                following
+            </a>
+        </li>
+    </ul>
+    <!-- CONTENT -->
+    <div class="content-tabs inner-wrap">
+        <div class="tabs">
+            <a href="#">
+                <span class="tab-content">
+                    <svg aria-label="Posts" class="posts" fill="#0095f6" height="24" viewBox="0 0 48 48" width="24">
+                        <path clip-rule="evenodd"
+                            d="M45 1.5H3c-.8 0-1.5.7-1.5 1.5v42c0 .8.7 1.5 1.5 1.5h42c.8 0 1.5-.7 1.5-1.5V3c0-.8-.7-1.5-1.5-1.5zm-40.5 3h11v11h-11v-11zm0 14h11v11h-11v-11zm11 25h-11v-11h11v11zm14 0h-11v-11h11v11zm0-14h-11v-11h11v11zm0-14h-11v-11h11v11zm14 28h-11v-11h11v11zm0-14h-11v-11h11v11zm0-14h-11v-11h11v11z"
+                            fill-rule="evenodd">
+                        </path>
+                    </svg>
+                    <span class="tab-text">Posts</span>
+                </span>
+            </a>
+        </div>
+        <div class="tabs">
+            <a href="#">
+                <span class="tab-content">
+                    <svg aria-label="Tagged" class="tagged" fill="#8e8e8e" height="12" viewBox="0 0 48 48" width="12">
+                        <path
+                            d="M41.5 5.5H30.4c-.5 0-1-.2-1.4-.6l-4-4c-.6-.6-1.5-.6-2.1 0l-4 4c-.4.4-.9.6-1.4.6h-11c-3.3 0-6 2.7-6 6v30c0 3.3 2.7 6 6 6h35c3.3 0 6-2.7 6-6v-30c0-3.3-2.7-6-6-6zm-29.4 39c-.6 0-1.1-.6-1-1.2.7-3.2 3.5-5.6 6.8-5.6h12c3.4 0 6.2 2.4 6.8 5.6.1.6-.4 1.2-1 1.2H12.1zm32.4-3c0 1.7-1.3 3-3 3h-.6c-.5 0-.9-.4-1-.9-.6-5-4.8-8.9-9.9-8.9H18c-5.1 0-9.4 3.9-9.9 8.9-.1.5-.5.9-1 .9h-.6c-1.7 0-3-1.3-3-3v-30c0-1.7 1.3-3 3-3h11.1c1.3 0 2.6-.5 3.5-1.5L24 4.1 26.9 7c.9.9 2.2 1.5 3.5 1.5h11.1c1.7 0 3 1.3 3 3v30zM24 12.5c-5.3 0-9.6 4.3-9.6 9.6s4.3 9.6 9.6 9.6 9.6-4.3 9.6-9.6-4.3-9.6-9.6-9.6zm0 16.1c-3.6 0-6.6-2.9-6.6-6.6 0-3.6 2.9-6.6 6.6-6.6s6.6 2.9 6.6 6.6c0 3.6-3 6.6-6.6 6.6z">
+                        </path>
+                    </svg>
+                </span>
+                <span class="tab-text">Tagged</span>
+            </a>
+        </div>
+    </div>
+    <!-- GALLERY -->
+    <div class="gallery-pics inner-wrap">
+        <div class="pic-wrap">
+            {% for post in posts %}
+            <div class="pic" data-total-likes="{{post.get_total_likes}}"
+                data-date-created="{{post.date_created|timesince}} ago" data-username="{{post.user.username}}"
+                data-user-profile-pic="{{post.user.profile_pic.url}}" onclick="popOut('{{post.id}}')" id="{{post.id}}">
+                <div class="opacity-overlay">
+                    {% for image in post.image.all %}
+                    <img src="{{image.image.url}}" alt="">
+                    {% endfor %}
+                </div>
+                <div class="icons">
+                    <div style="display:flex;">
+                        <i class="fa fa-heart"></i>
+                        <p style="margin-left: 5px;">{{post.get_total_likes}}</p>
+                    </div>
+                    <div style="display: flex;">
+                        <i class="fa fa-comment"></i>
+                        <p style="margin-left: 5px;">2m</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p style="position: absolute; left: 45%"><strong> No posts to show </strong></p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- pop up when clicked on any posts -->
+    <div class="pop-out-wrapper hidden" id="pop-out-wrapper">
+        <div class="close-btn-container" onclick="closeBtn()">
+            <p>X</p>
+        </div>
+        <div class="pop-out-post-container">
+            <div class="photo-container">
+                <img src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600w-1037719192.jpg"
+                    alt="placeholder" id="pop-out-card-post-image">
+            </div>
+
+            <div class="post-card">
+                <div class="user-info">
+                    <div class="info">
+                        <div class="profile-pic seen">
+                            <img src="https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600w-1037719192.jpg"
+                                alt="" class="profile-img" id="pop-out-card-user-profile-pic">
+                        </div>
+                        <p class="username" id="pop-out-card-username">Username</p>
+                    </div>
+                    <svg aria-label="More options" class="options" color="#262626" fill="#262626" height="24" role="img"
+                        viewBox="0 0 24 24" width="24">
+                        <circle cx="12" cy="12" r="1.5"></circle>
+                        <circle cx="6.5" cy="12" r="1.5"></circle>
+                        <circle cx="17.5" cy="12" r="1.5"></circle>
+                    </svg>
+                </div>
+
+                <div class="comments">
+                    <div class="comment">
+                        <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                            alt="placeholder">
+                        <div class="username-comment" style="margin-left: 10px;">
+                            <a href="#">Username</a>
+                            <p class="comment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+
+                    <div class="comment">
+                        <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                            alt="placeholder">
+                        <div class="username-comment" style="margin-left: 10px;">
+                            <a href="#">Username</a>
+                            <p class="comment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <img src="https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
+                            alt="placeholder">
+                        <div class="username-comment" style="margin-left: 10px;">
+                            <a href="#">Username</a>
+                            <p class="comment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-details">
+                    <div class="post-reactions">
+                        <svg aria-label="Like" class="like-ic-em rec-icon" color="#262626" height="24" role="img"
+                            viewBox="0 0 48 48" width="24" id="like-btn-{{post.id}}" onclick="like('{{post.id}}')"
+                            fill="#ed4956">
+                            <path
+                                d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z">
+                            </path>
+                        </svg>
+                        <svg aria-label="Comment" class="comment-ic rec-icon" color="#262626" fill="#262626" height="24"
+                            role="img" viewBox="0 0 48 48" width="24">
+                            <path clip-rule="evenodd"
+                                d="M47.5 46.1l-2.8-11c1.8-3.3 2.8-7.1 2.8-11.1C47.5 11 37 .5 24 .5S.5 11 .5 24 11 47.5 24 47.5c4 0 7.8-1 11.1-2.8l11 2.8c.8.2 1.6-.6 1.4-1.4zm-3-22.1c0 4-1 7-2.6 10-.2.4-.3.9-.2 1.4l2.1 8.4-8.3-2.1c-.5-.1-1-.1-1.4.2-1.8 1-5.2 2.6-10 2.6-11.4 0-20.6-9.2-20.6-20.5S12.7 3.5 24 3.5 44.5 12.7 44.5 24z"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                        <svg aria-label="Share Post" class="share-post-ic rec-icon" color="#262626" fill="#262626"
+                            height="24" role="img" viewBox="0 0 48 48" width="24">
+                            <path
+                                d="M47.8 3.8c-.3-.5-.8-.8-1.3-.8h-45C.9 3.1.3 3.5.1 4S0 5.2.4 5.7l15.9 15.6 5.5 22.6c.1.6.6 1 1.2 1.1h.2c.5 0 1-.3 1.3-.7l23.2-39c.4-.4.4-1 .1-1.5zM5.2 6.1h35.5L18 18.7 5.2 6.1zm18.7 33.6l-4.4-18.4L42.4 8.6 23.9 39.7z">
+                            </path>
+                        </svg>
+                        <svg aria-label="Save" class="sve-post-ic rec-icon" color="#262626" fill="#262626" height="24"
+                            role="img" viewBox="0 0 48 48" width="24">
+                            <path
+                                d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 29 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1zM24 26c.8 0 1.6.3 2.2.9l15.8 16V3H6v39.9l15.8-16c.6-.6 1.4-.9 2.2-.9z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="likes-div" id="likes-div-{{post.id}}">
+                        <p class="likes-cnt" id="likes-cnt">
+                            1m Likes
+                            </span>
+                        </p>
+                    </div>
+                    <div class="caption-div">
+                        <span>username</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam maxime
+                        sit,
+                    </div>
+                    <div class="post-time" id="post-time">1 day ago</div>
+                    <div class="comment-div">
+                        <svg aria-label="Emoji" class="rec-icon" color="#262626" fill="#262626" height="24" role="img"
+                            viewBox="0 0 48 48" width="24">
+                            <path
+                                d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24-10.8 24-24 24zm0-45C12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21S35.6 3 24 3z">
+                            </path>
+                            <path
+                                d="M34.9 24c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-21.8 0c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5zM24 37.3c-5.2 0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7 2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z">
+                            </path>
+                        </svg>
+                        <input type="text" class="comment-inp" placeholder="Add a comment" />
+                        <button class="comment-btn" disabled>Post</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="inner-wrap">
+        <nav>
+            <ul class="links">
+                <li>ABOUT</li>
+                <li>HELP</li>
+                <li>PRESS</li>
+                <li>API</li>
+                <li>JOBS</li>
+                <li>PRVACY</li>
+                <li>TERMS</li>
+                <li>LOCATION</li>
+                <li>TOP ACCOUNTS</li>
+                <li>HASHTAGS</li>
+                <li>LANGUAGE</li>
+            </ul>
+        </nav>
+        <span>
+            &copy; 2020 Gologram from GoloBro
+        </span>
+    </footer>
+</div>
+
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

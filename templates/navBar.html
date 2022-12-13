@@ -1,0 +1,167 @@
+{% load static %}
+
+<header>
+    <div class="nav-container">
+        <div class="logo-div">
+            <img src="{% static '/images/logo-name.png' %}" alt="Instagram">
+        </div>
+        <div class="search-div">
+            <input type="search" name="q" id="search" class="search-bar" placeholder="Search">
+        </div>
+        <div class="opt-div">
+            <div class="home-ic nav-icons mob-nav">
+                <a href="{% url 'home' %}">
+                    <svg aria-label="Home" class="_8-yf5 " color="#262626" fill="#262626" height="22" role="img"
+                        viewBox="0 0 48 48" width="22">
+                        <path
+                            d="M45.5 48H30.1c-.8 0-1.5-.7-1.5-1.5V34.2c0-2.6-2.1-4.6-4.6-4.6s-4.6 2.1-4.6 4.6v12.3c0 .8-.7 1.5-1.5 1.5H2.5c-.8 0-1.5-.7-1.5-1.5V23c0-.4.2-.8.4-1.1L22.9.4c.6-.6 1.6-.6 2.1 0l21.5 21.5c.3.3.4.7.4 1.1v23.5c.1.8-.6 1.5-1.4 1.5z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+            <div class="direct-ic nav-icons">
+                <a href="{% url 'chat' %}">
+                    <svg aria-label="Messenger" class="_8-yf5 " color="#262626" fill="#262626" height="22" role="img"
+                        viewBox="0 0 48 48" width="22">
+                        <path
+                            d="M36.2 16.7L29 22.2c-.5.4-1.2.4-1.7 0l-5.4-4c-1.6-1.2-3.9-.8-5 .9l-6.8 10.7c-.7 1 .6 2.2 1.6 1.5l7.3-5.5c.5-.4 1.2-.4 1.7 0l5.4 4c1.6 1.2 3.9.8 5-.9l6.8-10.7c.6-1.1-.7-2.2-1.7-1.5zM24 1C11 1 1 10.5 1 23.3 1 30 3.7 35.8 8.2 39.8c.4.3.6.8.6 1.3l.2 4.1c0 1 .9 1.8 1.8 1.8.2 0 .5 0 .7-.2l4.6-2c.2-.1.5-.2.7-.2.2 0 .3 0 .5.1 2.1.6 4.3.9 6.7.9 13 0 23-9.5 23-22.3S37 1 24 1zm0 41.6c-2 0-4-.3-5.9-.8-.4-.1-.8-.2-1.3-.2-.7 0-1.3.1-2 .4l-3 1.3V41c0-1.3-.6-2.5-1.6-3.4C6.2 34 4 28.9 4 23.3 4 12.3 12.6 4 24 4s20 8.3 20 19.3-8.6 19.3-20 19.3z">
+                        </path>
+                    </svg></a>
+            </div>
+            <div class="create-ic nav-icons">
+                <a onclick="showPostCreateForm()">
+                    <svg aria-label="New Post" class="_8-yf5 " color="#262626" fill="#262626" height="22" role="img"
+                        viewBox="0 0 48 48" width="22">
+                        <path
+                            d="M31.8 48H16.2c-6.6 0-9.6-1.6-12.1-4C1.6 41.4 0 38.4 0 31.8V16.2C0 9.6 1.6 6.6 4 4.1 6.6 1.6 9.6 0 16.2 0h15.6c6.6 0 9.6 1.6 12.1 4C46.4 6.6 48 9.6 48 16.2v15.6c0 6.6-1.6 9.6-4 12.1-2.6 2.5-5.6 4.1-12.2 4.1zM16.2 3C10 3 7.8 4.6 6.1 6.2 4.6 7.8 3 10 3 16.2v15.6c0 6.2 1.6 8.4 3.2 10.1 1.6 1.6 3.8 3.1 10 3.1h15.6c6.2 0 8.4-1.6 10.1-3.2 1.6-1.6 3.1-3.8 3.1-10V16.2c0-6.2-1.6-8.4-3.2-10.1C40.2 4.6 38 3 31.8 3H16.2z">
+                        </path>
+                        <path
+                            d="M36.3 25.5H11.7c-.8 0-1.5-.7-1.5-1.5s.7-1.5 1.5-1.5h24.6c.8 0 1.5.7 1.5 1.5s-.7 1.5-1.5 1.5z">
+                        </path>
+                        <path
+                            d="M24 37.8c-.8 0-1.5-.7-1.5-1.5V11.7c0-.8.7-1.5 1.5-1.5s1.5.7 1.5 1.5v24.6c0 .8-.7 1.5-1.5 1.5z">
+                        </path>
+                    </svg></a>
+            </div>
+            <div class="explore-ic nav-icons mob-nav-hide">
+                <a href="./explore/index.html">
+                    <svg aria-label="Find People" class="_8-yf5 " color="#262626" fill="#262626" height="22" role="img"
+                        viewBox="0 0 48 48" width="22">
+                        <path clip-rule="evenodd"
+                            d="M24 0C10.8 0 0 10.8 0 24s10.8 24 24 24 24-10.8 24-24S37.2 0 24 0zm0 45C12.4 45 3 35.6 3 24S12.4 3 24 3s21 9.4 21 21-9.4 21-21 21zm10.2-33.2l-14.8 7c-.3.1-.6.4-.7.7l-7 14.8c-.3.6-.2 1.3.3 1.7.3.3.7.4 1.1.4.2 0 .4 0 .6-.1l14.8-7c.3-.1.6-.4.7-.7l7-14.8c.3-.6.2-1.3-.3-1.7-.4-.5-1.1-.6-1.7-.3zm-7.4 15l-5.5-5.5 10.5-5-5 10.5z"
+                            fill-rule="evenodd"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="activity-ic nav-icons mob-nav">
+                <a href="./activity/index.html">
+                    <svg aria-label="Activity Feed" class="_8-yf5 " color="#262626" fill="#262626" height="22"
+                        role="img" viewBox="0 0 48 48" width="22">
+                        <path
+                            d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z">
+                        </path>
+                    </svg></a>
+            </div>
+            <div class="profile-ic nav-icons mob-nav">
+                <div class="bor-contain"></div>
+                <div class="img-contain">
+                    <a href="{% url 'profile' request.user.id %}">
+                        <img src="{{request.user.profile_pic.url}}" alt="profile pic" class="profile-pic-ic"
+                            id="default-pp">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="mob-nav-div">
+    <div class="home-ic">
+        <a href="./">
+            <svg aria-label="Home" class="_8-yf5 " color="#262626" fill="#262626" height="22" role="img"
+                viewBox="0 0 48 48" width="22">
+                <path
+                    d="M45.5 48H30.1c-.8 0-1.5-.7-1.5-1.5V34.2c0-2.6-2.1-4.6-4.6-4.6s-4.6 2.1-4.6 4.6v12.3c0 .8-.7 1.5-1.5 1.5H2.5c-.8 0-1.5-.7-1.5-1.5V23c0-.4.2-.8.4-1.1L22.9.4c.6-.6 1.6-.6 2.1 0l21.5 21.5c.3.3.4.7.4 1.1v23.5c.1.8-.6 1.5-1.4 1.5z">
+                </path>
+            </svg>
+        </a>
+    </div>
+    <div class="search-ic">
+        <a href="./explore/">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
+                role="img" width="22" height="22" preserveAspectRatio="xMidYMid meet" viewBox="0 0 20 20">
+                <path
+                    d="M17.545 15.467l-3.779-3.779a6.15 6.15 0 0 0 .898-3.21c0-3.417-2.961-6.377-6.378-6.377A6.185 6.185 0 0 0 2.1 8.287c0 3.416 2.961 6.377 6.377 6.377a6.15 6.15 0 0 0 3.115-.844l3.799 3.801a.953.953 0 0 0 1.346 0l.943-.943c.371-.371.236-.84-.135-1.211zM4.004 8.287a4.282 4.282 0 0 1 4.282-4.283c2.366 0 4.474 2.107 4.474 4.474a4.284 4.284 0 0 1-4.283 4.283c-2.366-.001-4.473-2.109-4.473-4.474z"
+                    fill="#262626" />
+            </svg>
+        </a>
+    </div>
+    <div class="reels-ic">
+        <a href="./reels/">
+            <svg aria-label="" class="_8-yf5 " color="#262626" fill="#262626" height="22" role="img" viewBox="0 0 48 48"
+                width="22">
+                <path
+                    d="M31.5 28.2l-11.2-6.5c-.5-.3-1-.3-1.5 0-.5.2-.8.7-.8 1.3v13c0 .5.3 1 .8 1.3.2.1.5.2.7.2.3 0 .5-.1.8-.2l11.2-6.5c.5-.3.7-.8.7-1.3s-.3-1-.7-1.3zM43.9 4c-2.5-2.4-5.5-4-12.2-4H16.2C9.6 0 6.6 1.6 4 4.1 1.6 6.6 0 9.6 0 16.2v15.5c0 6.6 1.6 9.7 4.1 12.2 2.5 2.4 5.5 4 12.2 4h15.5c6.6 0 9.7-1.6 12.2-4.1 2.4-2.5 4-5.5 4-12.2V16.2c0-6.6-1.6-9.6-4.1-12.2zM31.8 3c6.3 0 8.4 1.6 10 3.2 1.2 1.2 2.3 2.7 2.9 5.8h-9.3l-5.1-9h1.5zM16.2 3h10.5l5.1 9h-12l-5.1-9h1.5zm-10 3.2C7.3 5.1 8.7 4 11.5 3.4l4.9 8.6H3.3C3.9 8.9 5 7.4 6.2 6.2zM45 31.8c0 6.3-1.6 8.4-3.2 10-1.6 1.6-3.8 3.2-10 3.2H16.2c-6.3 0-8.4-1.6-10-3.2C4.6 40.2 3 38 3 31.8V15h42v16.8z">
+                </path>
+            </svg>
+        </a>
+    </div>
+    <div class="activity-ic">
+        <a href="./activity/">
+            <svg aria-label="Activity Feed" class="_8-yf5 " color="#262626" fill="#262626" height="22" role="img"
+                viewBox="0 0 48 48" width="22">
+                <path
+                    d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z">
+                </path>
+            </svg></a>
+    </div>
+    <div class="profile-ic">
+        <div class="bor-contain"></div>
+        <div class="img-contain">
+            <img src="{% static '/images/default-user.png' %}" alt="profile pic" class="profile-pic-ic" id="default-pp">
+        </div>
+    </div>
+</div>
+
+<div class="create-post-container hidden" id="create-post-container">
+    <button class="close-btn" id="close-btn" onclick="hidePostCreateForm()">X</button>
+    <div class="wrapper">
+        <div class="header">
+            <div class="top" style="border-radius: 10px;">
+                <div class="logo"
+                    style="display: flex; align-items: center; justify-content: center; margin-bottom: 30px;">
+                    <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"
+                        aria-label="Icon to represent media such as images or videos" class="_ab6-" color="#262626"
+                        fill="#262626" height="77" role="img" viewBox="0 0 97.6 77.3" width="96">
+                        <path
+                            d="M16.3 24h.3c2.8-.2 4.9-2.6 4.8-5.4-.2-2.8-2.6-4.9-5.4-4.8s-4.9 2.6-4.8 5.4c.1 2.7 2.4 4.8 5.1 4.8zm-2.4-7.2c.5-.6 1.3-1 2.1-1h.2c1.7 0 3.1 1.4 3.1 3.1 0 1.7-1.4 3.1-3.1 3.1-1.7 0-3.1-1.4-3.1-3.1 0-.8.3-1.5.8-2.1z"
+                            fill="#262626"></path>
+                        <path
+                            d="M84.7 18.4 58 16.9l-.2-3c-.3-5.7-5.2-10.1-11-9.8L12.9 6c-5.7.3-10.1 5.3-9.8 11L5 51v.8c.7 5.2 5.1 9.1 10.3 9.1h.6l21.7-1.2v.6c-.3 5.7 4 10.7 9.8 11l34 2h.6c5.5 0 10.1-4.3 10.4-9.8l2-34c.4-5.8-4-10.7-9.7-11.1zM7.2 10.8C8.7 9.1 10.8 8.1 13 8l34-1.9c4.6-.3 8.6 3.3 8.9 7.9l.2 2.8-5.3-.3c-5.7-.3-10.7 4-11 9.8l-.6 9.5-9.5 10.7c-.2.3-.6.4-1 .5-.4 0-.7-.1-1-.4l-7.8-7c-1.4-1.3-3.5-1.1-4.8.3L7 49 5.2 17c-.2-2.3.6-4.5 2-6.2zm8.7 48c-4.3.2-8.1-2.8-8.8-7.1l9.4-10.5c.2-.3.6-.4 1-.5.4 0 .7.1 1 .4l7.8 7c.7.6 1.6.9 2.5.9.9 0 1.7-.5 2.3-1.1l7.8-8.8-1.1 18.6-21.9 1.1zm76.5-29.5-2 34c-.3 4.6-4.3 8.2-8.9 7.9l-34-2c-4.6-.3-8.2-4.3-7.9-8.9l2-34c.3-4.4 3.9-7.9 8.4-7.9h.5l34 2c4.7.3 8.2 4.3 7.9 8.9z"
+                            fill="#262626"></path>
+                        <path
+                            d="M78.2 41.6 61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z"
+                            fill="#262626"></path>
+                    </svg>
+                </div>
+                {% if messages %}
+                {% for message in messages %}
+                <p class="message-text">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+                <form class="form" method="POST" enctype="multipart/form-data" action="">
+                    {% csrf_token %}
+                    <div class="input_field">
+                        <input type="file" class="input" name="photo" required>
+                    </div>
+                    <div class="input_field">
+                        <input type="caption" placeholder="Caption" class="input" name="caption" required>
+                    </div>
+
+                    <input type="submit" value="Post" class="submit-btn">
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

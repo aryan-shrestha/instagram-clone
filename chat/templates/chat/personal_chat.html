@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="wrapper">
+    <div class="chat-main-container">
+        <div class="friends-list">
+            <div class="chat-user-header" style="justify-content: center;">
+                <a href="">{{request.user.username}}</a>
+            </div>
+
+            <div class="friends">
+                {% for following in followings %}
+                <a class="friend" href="{% url 'personal_chat' following.followee.id %}">
+                    <img src="{{following.followee.profile_pic.url}}" alt="">
+                    {{following.followee.username}}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="base-container" id="base-container">
+            <div class="chat-user-header">
+                <img src="{{other_user.profile_pic.url}}" alt="">
+                <a href="{% url 'profile' user.id %}">{{other_user.username}}</a>
+            </div>
+            <div class="chat-thread" id="chat-thread">
+                {% for message in messages %}
+                {% if message.sender != request.user %}
+                <div class="friend-text-div">
+                    <img src='{{other_user.profile_pic.url}}' />
+                    <div class="friend-text-container">
+                        <div class="friend-text">{{message.message_body}}</div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="my-text-div">
+                    <div class="my-text-container">
+                        <div class="my-text">{{message.message_body}}</div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="message-input-form">
+                <input type="text" name="msg-txt" id="msg-txt" placeholder="Message...">
+                <input type="submit" value="Send" id="send-btn" onclick="sendMessage()">
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ request.user.id|json_script:"user" }}
+{{ other_user.id|json_script:"other_user" }}
+
+<script src="{% static 'js/chat.js' %}"></script>
+
+{% endblock %}
